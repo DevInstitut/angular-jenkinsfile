@@ -13,7 +13,7 @@ pipeline {
         }
         stage('build') {
           steps {
-              "${env.WORKSPACE}/env.groovy"
+              load "${env.WORKSPACE}/env.groovy"
               sh 'npm run build'
           }
         }
