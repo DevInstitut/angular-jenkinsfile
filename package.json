@@ -5,11 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "cross-var ng build --prod --base-href $ABSENCES_FRONT_PROD",
+    "build": "cross-var ng build --prod --base-href https://$GH_ORG.github.io/$ABSENCES_FRONT_REPO/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ngh --no-silent"
+    "deploy": "cross-var ngh --no-silent --name=jenkins --email=jenkins@jenkins.io --repo=https://$GH_TOKEN@github.com/$GH_ORG/$ABSENCES_FRONT_REPO.git"
   },
   "private": true,
   "dependencies": {
