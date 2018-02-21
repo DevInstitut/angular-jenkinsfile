@@ -13,7 +13,7 @@ pipeline {
         }
         stage('deploy') {
           steps {
-              sh 'git config --global user.email "jenkins@jenkins.com"
+              sh 'git config --global user.email jenkins@jenkins.com'
               sh 'git config --global user.name jenkins'
               sh 'npm run deploy'
           }
