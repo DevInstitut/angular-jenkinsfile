@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        GH_ORG = "JavaFritDuKentucky"
+        APP_REPO = "absences-front"
+        BACKEND_PROD = "https://absences-back.cleverapps.io"
+    }
     stages {
         stage('install') {
           steps {
@@ -8,6 +13,7 @@ pipeline {
         }
         stage('build') {
           steps {
+              "${env.WORKSPACE}/env.groovy"
               sh 'npm run build'
           }
         }
@@ -22,7 +28,7 @@ pipeline {
     }
     post {
         success {
-           slackSend channel: '#jenkins_nantes', color: 'good', message: "Succès ! ${env.JOB_NAME} commit ${env.GIT_COMMIT} https://${GH_ORG}.github.io/${ABSENCES_FRONT_REPO}/"
+           slackSend channel: '#jenkins_nantes', color: 'good', message: "Succès ! ${env.JOB_NAME} commit ${env.GIT_COMMIT} https://${GH_ORG}.github.io/${APP_REPO}/"
         }
         failure {
             slackSend channel: '#jenkins_nantes', color: 'danger', message: "Oops ! ${env.JOB_NAME} commit ${env.GIT_COMMIT} (<${env.BUILD_URL}|Open>)"
